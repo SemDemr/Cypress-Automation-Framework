@@ -19,6 +19,7 @@ describe('Verifying variables, cypress commands and jquery commands', () => {
 
         //Recommended approach
         cy.get('a[href*="product/category&path="]').contains("Makeup").click()
+        
 
         //following code will fail
         // const header = cy.get("h1 .maintext")
@@ -37,6 +38,32 @@ describe('Verifying variables, cypress commands and jquery commands', () => {
 
 
     });
+
+    it.only('Validate properties of the Contact Us Page', () => {
+        cy.visit("https://automationteststore.com/index.php?rt=content/contact")
+
+        //Uses cypress commands and chaining
+        cy.contains('#ContactUsFrm','Contact Us Form').find('#field_11').should('contain','First name:')
+
+        //JQuery Approach
+        cy.contains('#ContactUsFrm','Contact Us Form').then(text => {
+            const firstNameText = text.find('#field_11').text()
+            expect(firstNameText).to.contain('First name')
+       
+            //Embeded commands (Closure)
+            cy.get('#field_11').then(fText => {
+                cy.log(fText.text())
+                cy.log(fText)
+            })
+
+       
+        })
+
+
+
+        
+
+    })
 
 
 
