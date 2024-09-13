@@ -10,7 +10,7 @@ describe('Verifying variables, cypress commands and jquery commands', () => {
         //skincareLink.click()
 
 
-        //The following will pass
+        //The following will pass but not recommended
         //const makeupLink = cy.get('a[href*="product/category&path="]').contains("Makeup")
         //makeupLink.click()
         //const skincareLink = cy.get('a[href*="product/category&path="]').contains("Skincare")
@@ -23,14 +23,14 @@ describe('Verifying variables, cypress commands and jquery commands', () => {
 
         //following code will fail
         // const header = cy.get("h1 .maintext")
-        // cy.log(header.text())
+        // cy.log(header.text()) //not working
 
         //cy.get('a[href*="product/category&path="]').contains("Skincare").click()
 
-        cy.get("h1 .maintext").then(($headerText) => {
-            const headerText = $headerText.text()
+        cy.get("h1 .maintext").then(($headerText) => {    //js promising
+            const headerText = $headerText.text()  //we are using jquery text() method here
             cy.log("Found header text: " + headerText)
-            expect(headerText).is.eq('Makeup')
+            expect(headerText).is.eq('Makeup') //chai assertion
         })
 
 
@@ -51,9 +51,9 @@ describe('Verifying variables, cypress commands and jquery commands', () => {
             expect(firstNameText).to.contain('First name')
        
             //Embeded commands (Closure)
-            cy.get('#field_11').then(fText => {
-                cy.log(fText.text())
-                cy.log(fText)
+            cy.get('#field_11').then(fnText => {
+                cy.log(fnText.text())
+                cy.log(fnText) // this one is not returning with text it is returning with element location
             })
 
        
