@@ -1,4 +1,4 @@
-/// <reference types="Cypress" />
+/// <reference types="cypress" />
 describe("Handling data", () => {
     beforeEach(() => {
         cy.visit("http://webdriveruniversity.com/");
